@@ -112,3 +112,58 @@ export const distributeElements = (
     });
   });
 };
+
+/**
+ * Arranges selected elements (respecting groups) evenly around a circle
+ * centered on their common bounding box, preserving their angular order.
+ */
+export const arrangeElementsInCircle = (
+  selectedElements: NonDeletedExcalidrawElement[],
+  elementsMap: ElementsMap,
+  appState: Readonly<AppState>,
+  scene: Scene,
+): NonDeletedExcalidrawElement[] => {
+  const bounds = getCommonBoundingBox(selectedElements);
+  const cx = bounds.midX;
+  const cy = bounds.midY;
+
+  const groups = getSelectedElementsByGroup(
+    selectedElements,
+    elementsMap,
+    appState,
+  )
+    .map(getNonDeletedElements)
+    .map((group) => [group, getCommonBoundingBox(group)] as const)
+    .sort(
+      (a, b) =>
+        Math.atan2(a[1].midY - cy, a[1].midX - cx) -
+        Math.atan2(b[1].midY - cy, b[1].midX - cx),
+    );
+
+  // big enough so neighbours don't overlap, but at least the current size
+  const circumference = groups.reduce(
+    (acc, [, box]) => acc + Math.hypot(box.width, box.height),
+    0,
+  );
+  const radius = Math.max(
+    Math.min(bounds.width, bounds.height) / 2,
+    circumference / (2 * Math.PI),
+  );
+
+  const startAngle = Math.atan2(groups[0][1].midY - cy, groups[0][1].midX - cx);
+
+  return groups.flatMap(([group, box], index) => {
+    const angle = startAngle + (index * 2 * Math.PI) / groups.length;
+    const dx = cx + radius * Math.cos(angle) - box.midX;
+    const dy = cy + radius * Math.sin(angle) - box.midY;
+
+    return group.map((element) => {
+      const updatedElement = scene.mutateElement(element, {
+        x: element.x + dx,
+        y: element.y + dy,
+      });
+      updateBoundElements(element, scene, { simultaneouslyUpdated: group });
+      return updatedElement;
+    });
+  });
+};

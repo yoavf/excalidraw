@@ -6,7 +6,10 @@ import { CODES, KEYS, arrayToMap } from "@excalidraw/common";
 
 import { updateFrameMembershipOfSelectedElements } from "@excalidraw/element";
 
-import { distributeElements } from "@excalidraw/element";
+import {
+  arrangeElementsInCircle,
+  distributeElements,
+} from "@excalidraw/element";
 
 import { CaptureUpdateAction } from "@excalidraw/element";
 
@@ -125,6 +128,54 @@ export const distributeVertically = register({
       onClick={() => updateData(null)}
       title={`${t("labels.distributeVertically")} — ${getShortcutKey("Alt+V")}`}
       aria-label={t("labels.distributeVertically")}
+      visible={isSomeElementSelected(getNonDeletedElements(elements), appState)}
+    />
+  ),
+});
+
+const ArrangeInCircleIcon = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <circle cx="12" cy="12" r="7" strokeDasharray="2 2" />
+    <rect x="10" y="3" width="4" height="4" fill="currentColor" />
+    <rect x="17" y="10" width="4" height="4" fill="currentColor" />
+    <rect x="10" y="17" width="4" height="4" fill="currentColor" />
+    <rect x="3" y="10" width="4" height="4" fill="currentColor" />
+  </svg>
+);
+
+export const arrangeInCircle = register({
+  name: "arrangeInCircle",
+  label: "labels.arrangeInCircle",
+  icon: ArrangeInCircleIcon,
+  trackEvent: { category: "element" },
+  predicate: (elements, appState, _, app) => enableActionGroup(appState, app),
+  perform: (elements, appState, _, app) => {
+    const updatedElementsMap = arrayToMap(
+      arrangeElementsInCircle(
+        app.scene.getSelectedElements(appState),
+        app.scene.getNonDeletedElementsMap(),
+        appState,
+        app.scene,
+      ),
+    );
+    return {
+      appState,
+      elements: updateFrameMembershipOfSelectedElements(
+        elements.map((el) => updatedElementsMap.get(el.id) || el),
+        appState,
+        app,
+      ),
+      captureUpdate: CaptureUpdateAction.IMMEDIATELY,
+    };
+  },
+  PanelComponent: ({ elements, appState, updateData, app }) => (
+    <IconButton
+      hidden={!enableActionGroup(appState, app)}
+      type="button"
+      icon={ArrangeInCircleIcon}
+      onClick={() => updateData(null)}
+      title={t("labels.arrangeInCircle")}
+      aria-label={t("labels.arrangeInCircle")}
       visible={isSomeElementSelected(getNonDeletedElements(elements), appState)}
     />
   ),

@@ -1,6 +1,7 @@
 import {
   distributeHorizontally,
   distributeVertically,
+  arrangeInCircle,
 } from "@excalidraw/excalidraw/actions";
 import { defaultLang, setLanguage } from "@excalidraw/excalidraw/i18n";
 import { Excalidraw } from "@excalidraw/excalidraw";
@@ -124,5 +125,22 @@ describe("distributing", () => {
     expect(API.getSelectedElements()[0].y).toEqual(0);
     expect(API.getSelectedElements()[1].y).toEqual(50);
     expect(API.getSelectedElements()[2].y).toEqual(200);
+  });
+
+  it("should arrange selected elements evenly around a circle", async () => {
+    createAndSelectThreeRectanglesWithGap();
+    API.executeAction(arrangeInCircle);
+
+    const centers = API.getSelectedElements().map((el) => [
+      el.x + el.width / 2,
+      el.y + el.height / 2,
+    ]);
+    const cx = centers.reduce((a, c) => a + c[0], 0) / 3;
+    const cy = centers.reduce((a, c) => a + c[1], 0) / 3;
+    const radii = centers.map(([x, y]) => Math.hypot(x - cx, y - cy));
+
+    expect(radii[0]).toBeGreaterThan(0);
+    expect(radii[1]).toBeCloseTo(radii[0]);
+    expect(radii[2]).toBeCloseTo(radii[0]);
   });
 });

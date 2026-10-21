@@ -65,6 +65,7 @@ export {
 export {
   distributeHorizontally,
   distributeVertically,
+  arrangeInCircle,
 } from "./actionDistribute";
 
 export { actionFlipHorizontal, actionFlipVertical } from "./actionFlip";
