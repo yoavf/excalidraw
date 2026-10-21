@@ -100,6 +100,8 @@ Check out our [documentation](https://docs.excalidraw.com/docs/@excalidraw/excal
 - Want to contribute? Check out our [contribution guide](https://docs.excalidraw.com/docs/introduction/contributing) or let us know on [Discord](https://discord.gg/UexuTaE).
 - Want to help with translations? See the [translation guide](https://docs.excalidraw.com/docs/introduction/contributing#translating).
 
+Need help? Ask on [Discord](https://discord.gg/UexuTaE) or [open an issue](https://github.com/excalidraw/excalidraw/issues).
+
 ## Integrations
 
 - [VScode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor)
