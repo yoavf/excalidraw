@@ -109,6 +109,10 @@ Check out our [documentation](https://docs.excalidraw.com/docs/@excalidraw/excal
 
 [Google Cloud](https://googlecloudcheatsheet.withgoogle.com/architecture) • [Meta](https://meta.com/) • [CodeSandbox](https://codesandbox.io/) • [Obsidian Excalidraw](https://github.com/zsviczian/obsidian-excalidraw-plugin) • [Replit](https://replit.com/) • [Slite](https://slite.com/) • [Notion](https://notion.so/) • [HackerRank](https://www.hackerrank.com/) • and many others
 
+## Changelog
+
+See [GitHub Releases](https://github.com/excalidraw/excalidraw/releases) for release notes and changes.
+
 ## Sponsors & support
 
 If you like the project, you can become a sponsor at [Open Collective](https://opencollective.com/excalidraw) or use [Excalidraw+](https://plus.excalidraw.com/).
