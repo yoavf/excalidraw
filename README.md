@@ -9,7 +9,8 @@
   <a href="https://excalidraw.com">Excalidraw Editor</a> |
   <a href="https://plus.excalidraw.com/blog">Blog</a> |
   <a href="https://docs.excalidraw.com">Documentation</a> |
-  <a href="https://plus.excalidraw.com">Excalidraw+</a>
+  <a href="https://plus.excalidraw.com">Excalidraw+</a> |
+  <a href="https://docs.excalidraw.com/docs/@excalidraw/excalidraw/faq">FAQ</a>
 </h4>
 
 <div align="center">
