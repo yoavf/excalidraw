@@ -99,6 +99,7 @@ Check out our [documentation](https://docs.excalidraw.com/docs/@excalidraw/excal
 - Missing something or found a bug? [Report here](https://github.com/excalidraw/excalidraw/issues).
 - Want to contribute? Check out our [contribution guide](https://docs.excalidraw.com/docs/introduction/contributing) or let us know on [Discord](https://discord.gg/UexuTaE).
 - Want to help with translations? See the [translation guide](https://docs.excalidraw.com/docs/introduction/contributing#translating).
+- Please follow our [code of conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/) when participating.
 
 ## Integrations
 
