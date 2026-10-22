@@ -148,6 +148,7 @@ import "./index.scss";
 
 import { ExcalidrawPlusPromoBanner } from "./components/ExcalidrawPlusPromoBanner";
 import { AppSidebar } from "./components/AppSidebar";
+import { rainbowify } from "./rainbowify";
 
 import type { CollabAPI } from "./collab/Collab";
 
@@ -1245,6 +1246,13 @@ const ExcalidrawWrapper = () => {
                   "noopener noreferrer",
                 );
               },
+            },
+            {
+              label: "Rainbowify",
+              category: DEFAULT_CATEGORIES.app,
+              keywords: ["rainbow", "color", "colorful", "fun", "surprise"],
+              predicate: true,
+              perform: () => excalidrawAPI && rainbowify(excalidrawAPI),
             },
             ...(isExcalidrawPlusSignedUser
               ? [
